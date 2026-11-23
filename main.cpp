@@ -120,7 +120,7 @@ bool IsBoardFull()
 
 std::wstring GetPlayerText(Stone player)
 {
-    return player == Stone::Black ? L"ºÚÆå" : L"°×Æå";
+    return player == Stone::Black ? L"é»‘æ£‹" : L"ç™½æ£‹";
 }
 
 void UpdateStatus()
@@ -130,7 +130,7 @@ void UpdateStatus()
         return;
     }
 
-    std::wstring text = L"µ±Ç°»ØºÏ£º" + GetPlayerText(g_currentPlayer);
+    std::wstring text = L"å½“å‰å›åˆï¼š" + GetPlayerText(g_currentPlayer);
     SetWindowTextW(g_statusLabel, text.c_str());
 }
 
@@ -271,8 +271,8 @@ void HandleBoardClick(HWND hwnd, int mouseX, int mouseY)
     {
         MessageBoxW(
             hwnd,
-            L"¸ÃÎ»ÖÃÒÑ¾­ÓĞÆå×Ó£¬ÇëÑ¡ÔñÆäËûÎ»ÖÃ¡£",
-            L"ÌáÊ¾",
+            L"è¯¥ä½ç½®å·²ç»æœ‰æ£‹å­ï¼Œè¯·é€‰æ‹©å…¶ä»–ä½ç½®ã€‚",
+            L"æç¤º",
             MB_OK | MB_ICONINFORMATION);
 
         return;
@@ -285,14 +285,14 @@ void HandleBoardClick(HWND hwnd, int mouseX, int mouseY)
         g_gameOver = true;
 
         std::wstring message =
-            GetPlayerText(g_currentPlayer) + L"»ñÊ¤£¡";
+            GetPlayerText(g_currentPlayer) + L"è·èƒœï¼";
 
         SetWindowTextW(g_statusLabel, message.c_str());
 
         MessageBoxW(
             hwnd,
             message.c_str(),
-            L"ÓÎÏ·½áÊø",
+            L"æ¸¸æˆç»“æŸ",
             MB_OK | MB_ICONINFORMATION);
 
         InvalidateRect(hwnd, nullptr, TRUE);
@@ -302,12 +302,12 @@ void HandleBoardClick(HWND hwnd, int mouseX, int mouseY)
     if (IsBoardFull())
     {
         g_gameOver = true;
-        SetWindowTextW(g_statusLabel, L"ÆåÅÌÒÑÂú£¬Ë«·½ºÍÆå¡£");
+        SetWindowTextW(g_statusLabel, L"æ£‹ç›˜å·²æ»¡ï¼ŒåŒæ–¹å’Œæ£‹ã€‚");
 
         MessageBoxW(
             hwnd,
-            L"ÆåÅÌÒÑÂú£¬Ë«·½ºÍÆå¡£",
-            L"ÓÎÏ·½áÊø",
+            L"æ£‹ç›˜å·²æ»¡ï¼ŒåŒæ–¹å’Œæ£‹ã€‚",
+            L"æ¸¸æˆç»“æŸ",
             MB_OK | MB_ICONINFORMATION);
 
         InvalidateRect(hwnd, nullptr, TRUE);
@@ -350,14 +350,14 @@ LRESULT CALLBACK WindowProcedure(
 
         CreateWindowW(
             L"BUTTON",
-            L"ÖØĞÂ¿ªÊ¼",
+            L"é‡æ–°å¼€å§‹",
             WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON,
             510,
             645,
             110,
             36,
             hwnd,
-            reinterpret_cast<HMENU>(RESTART_BUTTON_ID),
+            reinterpret_cast<HMENU>(static_cast<UINT_PTR>(RESTART_BUTTON_ID)),
             GetModuleHandleW(nullptr),
             nullptr);
 
@@ -427,7 +427,7 @@ int WINAPI wWinMain(
 
     HWND hwnd = CreateWindowW(
         windowClassName,
-        L"Îå×ÓÆå - Ë«ÈË¶ÔÕ½",
+        L"äº”å­æ£‹ - åŒäººå¯¹æˆ˜",
         WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
